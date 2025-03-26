@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartu Interaktif</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('kartu.png') no-repeat center center/cover; /* Ganti dengan gambar lo */
+            font-family: 'Fredoka One', cursive;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .card-container {
+            position: relative;
+            width: 250px;
+            height: 350px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            border-radius: 15px;
+            transition: transform 0.6s ease, opacity 0.6s ease, scale 0.4s ease;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            opacity: 1;
+        }
+
+        .card.front {
+            background: #ff6f61;
+        }
+
+        .flipped {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .instruction {
+            margin-top: 20px;
+            font-size: 18px;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .final-container {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        .final-text {
+            font-size: 22px;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .gift-button {
+            padding: 10px 20px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .gift-button:hover {
+            background: #d81b60;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container" onclick="flipCard()">
+        <div class="card front" id="card">
+            Klik cintaakuu💝
+        </div>
+    </div>
+
+    <p class="instruction" id="instructionText">Klik klik terus yaa😘</p>
+
+    <div class="final-container" id="finalContainer">
+        <p class="final-text">Hehe kata-katanya udah habis sayang😁, liat kado lain yukk! 🎁</p>
+        <button class="gift-button" onclick="window.location.href='halaman.html'">Lihat Kado Lain</button>
+    </div>
+
+    <script>
+        let currentCard = 0;
+        const words = [
+            "Hari ini senyum gratis, ayo senyum! 😁",
+            "Kamu paket combo: cantik + manis + ngeselin dikit 😆",
+            "Dilarang galau, nanti aku ikut galau! 🙈",
+            "Senyummu = Token listrik, bikin hidupku nyala terus! 💡",
+            "Kalau kamu jadi matematika, aku pasti nggak bakal bosan belajar 😍",
+            "Cintaku ke kamu kayak charger ori, nggak bakal panas walau dipakai terus ❤️",
+            "Kamu itu ibarat WiFi, sinyal cintamu bikin aku betah nempel! 📶",
+            "Kalau sayang itu lomba, aku pasti juara 1! 🏆",
+            "Kamu kayak donat, makin dilihat makin pengen ngemil! 🍩",
+            "Cinta kita kayak kopi, bikin melek terus! ☕"
+        ];
+
+        function flipCard() {
+            let card = document.getElementById("card");
+            let instructionText = document.getElementById("instructionText");
+            let finalContainer = document.getElementById("finalContainer");
+
+            if (currentCard < words.length) {
+                card.classList.add("flipped");
+
+                setTimeout(() => {
+                    card.innerHTML = words[currentCard];
+                    card.classList.remove("flipped");
+                    currentCard++;
+                }, 400);
+            } else {
+                // Setelah klik terakhir, baru muncul pesan akhir
+                instructionText.style.display = "none"; // Hilangin tulisan instruksi
+                setTimeout(() => {
+                    card.style.display = "none";
+                    finalContainer.style.display = "flex"; // Munculin pesan terakhir
+                }, 400);
+            }
+        }
+    </script>
+
+</body>
+</html>

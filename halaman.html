@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hadiah Ulang Tahun</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffccdc; /* Pink lembut */
+            font-family: 'Fredoka One', cursive;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Tulisan Happy Birthday */
+        .title {
+            font-size: 28px;
+            color: white;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        /* Tulisan Sayangkuu Cintaakuu */
+        .subtitle {
+            font-size: 22px;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Container kado */
+        .gift-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Kotak Kado */
+        .gift {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+            animation: shake 1.5s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0); }
+            25% { transform: rotate(2deg); }
+            50% { transform: rotate(-2deg); }
+            75% { transform: rotate(2deg); }
+        }
+
+        .gift:hover {
+            transform: scale(1.1);
+        }
+
+        /* Warna-warni kado */
+        .gift:nth-child(1) { background: #ff6f61; } /* Merah */
+        .gift:nth-child(2) { background: #ffb74d; } /* Orange */
+        .gift:nth-child(3) { background: #64b5f6; } /* Biru */
+
+        /* Tutup Kado */
+        .gift::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            width: 100%;
+            height: 20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .gift:nth-child(1)::before { background: #d84315; }
+        .gift:nth-child(2)::before { background: #f57c00; }
+        .gift:nth-child(3)::before { background: #1e88e5; }
+
+        /* Pita Tengah */
+        .ribbon {
+            position: absolute;
+            width: 15px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .gift:nth-child(1) .ribbon { background: #d84315; }
+        .gift:nth-child(2) .ribbon { background: #f57c00; }
+        .gift:nth-child(3) .ribbon { background: #1e88e5; }
+
+        /* Pita Atas */
+        .ribbon-top {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            clip-path: ellipse(50% 100% at 50% 0%);
+        }
+
+        .gift:nth-child(1) .ribbon-top { background: #d84315; }
+        .gift:nth-child(2) .ribbon-top { background: #f57c00; }
+        .gift:nth-child(3) .ribbon-top { background: #1e88e5; }
+
+        /* Motif di kado */
+        .gift::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 10%, transparent 20%);
+            background-size: 15px 15px;
+            border-radius: 10px;
+        }
+
+        /* Efek Kembang Api */
+        .firework {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: yellow;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fireworks 1.5s infinite;
+        }
+
+        @keyframes fireworks {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(3);
+            }
+        }
+
+        /* Pembuat */
+        .creator {
+            margin-top: 20px;
+            font-size: 16px;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        /* Responsif untuk HP */
+        @media (max-width: 480px) {
+            .title {
+                font-size: 22px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+
+            .gift {
+                width: 60px;
+                height: 60px;
+            }
+
+            .gift::before {
+                height: 15px;
+            }
+
+            .ribbon {
+                width: 10px;
+            }
+
+            .ribbon-top {
+                width: 45px;
+                height: 20px;
+            }
+
+            .creator {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title">🎉Happy Birthday🎁</div>
+    <div class="subtitle">💝Sayangkuu Cintaakuu❤️</div>
+
+    <div class="gift-container">
+        <div class="gift" onclick="window.location.href='halaman_surat.html'">
+            <div class="ribbon"></div>
+            <div class="ribbon-top"></div>
+        </div>
+        <div class="gift" onclick="window.location.href='halaman_pohon.html'"> <!-- Kado Tengah Menuju Halaman Pohon -->
+            <div class="ribbon"></div>
+            <div class="ribbon-top"></div>
+        </div>
+        <div class="gift" onclick="window.location.href='halaman_special.html'">
+            <div class="ribbon"></div>
+            <div class="ribbon-top"></div>
+        </div>
+    </div>
+
+    <p class="creator">Pembuat: Arta Ganteng 😎🔥</p>
+
+    <script>
+        function createFirework() {
+            const firework = document.createElement("div");
+            firework.classList.add("firework");
+            document.body.appendChild(firework);
+
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            const delay = Math.random() * 1.5;
+
+            firework.style.left = `${x}px`;
+            firework.style.top = `${y}px`;
+            firework.style.animationDelay = `${delay}s`;
+
+            setTimeout(() => {
+                firework.remove();
+            }, 1500);
+        }
+
+        setInterval(createFirework, 300);
+    </script>
+
+</body>
+</html>

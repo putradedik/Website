@@ -1,0 +1,88 @@
+body { 
+    background: url('latar.png') no-repeat center center fixed; /* Background halaman login */
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding: 10px; /* Supaya ada ruang di pinggir saat layar kecil */
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.3); /* Transparan dengan efek blur */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    backdrop-filter: blur(1px); /* Efek blur lebih halus */
+    width: 90%;
+    max-width: 350px;
+}
+
+.login-container h2 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.login-container p {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+input {
+    display: block;
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+button {
+    background: #a67c52;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #8b5e3b;
+}
+
+/* Media Query untuk tampilan lebih kecil (HP) */
+@media (max-width: 480px) {
+    .login-container {
+        width: 100%;
+        max-width: 300px;
+        padding: 12px;
+    }
+
+    .login-container h2 {
+        font-size: 18px;
+    }
+
+    .login-container p {
+        font-size: 12px;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
