@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Cinta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        /* Styling Umum */
+        body {
+            background: url('kartu.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            font-family: 'Fredoka One', cursive;
+            margin: 0;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Love Container */
+        .love-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 1s ease-in-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Love */
+        .love {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            animation: pulse 1.5s infinite;
+        }
+
+        .love::before, .love::after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            background: red;
+            border-radius: 50px 50px 0 0;
+            top: 0;
+        }
+
+        .love::before {
+            left: 50px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .love::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .love:hover {
+            transform: scale(1.2);
+        }
+
+        .click-text {
+            font-size: 18px;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* Surat */
+        .letter-container {
+            width: 85%;
+            max-width: 320px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 5px solid #a67c52;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(90deg);
+            opacity: 0;
+            display: none;
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+            z-index: 1;
+        }
+
+        .letter-text {
+            font-size: 15px;
+            color: black;
+            line-height: 1.6;
+        }
+
+        .back-text {
+            font-size: 18px;
+            color: #d84315;
+            margin-top: 20px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .back-text:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .love {
+                width: 80px;
+                height: 80px;
+            }
+            .letter-container {
+                width: 95%;
+            }
+            .letter-text {
+                font-size: 14px;
+            }
+            .click-text {
+                font-size: 16px;
+            }
+            .back-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Love -->
+    <div class="love-container" id="loveContainer">
+        <div class="love" onclick="showLetter()"></div>
+        <div class="click-text" id="clickText">Klik Sayaang❤️</div>
+    </div>
+
+    <!-- Surat -->
+    <div class="letter-container" id="letter">
+        <p class="letter-text">
+            Sayangku, <br><br>
+            Dari pertama kali kita bertemu, aku tahu ada sesuatu yang istimewa tentangmu. 
+            Senyummu, suaramu, caramu berbicara, semuanya membuatku jatuh cinta setiap hari. 
+            Aku bersyukur memiliki kamu dalam hidupku. Kamu adalah cahaya yang selalu 
+            menerangi hariku, penghibur saat aku sedih, dan alasan di balik setiap senyumku. <br><br>
+            Aku ingin kamu tahu bahwa aku akan selalu ada untukmu, mendukungmu, dan mencintaimu 
+            dengan sepenuh hatiku. Terima kasih telah menjadi bagian terindah dalam hidupku. ❤️
+        </p>
+
+        <!-- Tombol kembali -->
+        <div class="back-text" id="backText" onclick="goBack()">🎁 Lihat Kado Lain</div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function showLetter() {
+            let letter = document.getElementById("letter");
+            let loveContainer = document.getElementById("loveContainer");
+            let backText = document.getElementById("backText");
+
+            // Animasi surat dengan flip dari bawah ke atas
+            letter.style.display = "block";
+            setTimeout(() => {
+                letter.style.opacity = "1";
+                letter.style.transform = "translate(-50%, -50%) rotateX(0deg)";
+            }, 10);
+
+            // Love menghilang
+            loveContainer.style.opacity = "0";
+            setTimeout(() => {
+                loveContainer.style.display = "none";
+            }, 1000);
+
+            // Teks "Lihat Kado Lain" muncul setelah surat
+            setTimeout(() => {
+                backText.style.opacity = "1";
+            }, 1500);
+        }
+
+        function goBack() {
+            window.location.href = "halaman.html";
+        }
+
+        // Animasi teks "Klik Sayaang❤️"
+        setTimeout(() => {
+            document.getElementById("clickText").style.opacity = "1";
+        }, 1000);
+    </script>
+
+</body>
+</html>
