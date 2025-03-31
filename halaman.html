@@ -12,22 +12,20 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #ffccdc; /* Pink lembut */
+            background-color: #ffccdc;
             font-family: 'Fredoka One', cursive;
             margin: 0;
             overflow: hidden;
         }
 
-        /* Tulisan Happy Birthday */
         .title {
             font-size: 28px;
             color: white;
             text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             text-align: center;
         }
 
-        /* Tulisan Sayangkuu Cintaakuu */
         .subtitle {
             font-size: 22px;
             color: white;
@@ -36,27 +34,23 @@
             text-align: center;
         }
 
-        /* Container kado */
         .gift-container {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             flex-wrap: wrap;
             justify-content: center;
         }
 
-        /* Kotak Kado */
         .gift {
             position: relative;
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             cursor: pointer;
             transition: transform 0.3s;
             box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
             animation: shake 1.5s infinite;
+            background-size: 20px 20px;
         }
 
         @keyframes shake {
@@ -70,87 +64,85 @@
             transform: scale(1.1);
         }
 
-        /* Warna-warni kado */
-        .gift:nth-child(1) { background: #ff6f61; } /* Merah */
-        .gift:nth-child(2) { background: #ffb74d; } /* Orange */
-        .gift:nth-child(3) { background: #64b5f6; } /* Biru */
-
-        /* Tutup Kado */
-        .gift::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            width: 100%;
-            height: 20px;
-            border-radius: 8px 8px 0 0;
+        /* Motif dan warna kado */
+        .gift:nth-child(1) {
+            background-color: #ff6f61;
+            background-image: radial-gradient(white 10%, transparent 10%);
+            background-size: 15px 15px;
         }
 
-        .gift:nth-child(1)::before { background: #d84315; }
-        .gift:nth-child(2)::before { background: #f57c00; }
-        .gift:nth-child(3)::before { background: #1e88e5; }
+        .gift:nth-child(2) {
+            background-color: #ffb74d;
+            background-image: repeating-linear-gradient(
+                45deg,
+                white,
+                white 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
 
-        /* Pita Tengah */
+        .gift:nth-child(3) {
+            background-color: #64b5f6;
+            background-image: linear-gradient(
+                135deg,
+                white 25%,
+                transparent 25%,
+                transparent 50%,
+                white 50%,
+                white 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 20px 20px;
+        }
+
+        .lid {
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: #d84315;
+            top: -10px;
+            left: 0;
+            border-radius: 10px 10px 0 0;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .gift:nth-child(2) .lid { background: #f57c00; }
+        .gift:nth-child(3) .lid { background: #1e88e5; }
+
         .ribbon {
             position: absolute;
             width: 15px;
             height: 100%;
+            background: #d84315;
             left: 50%;
             transform: translateX(-50%);
         }
 
-        .gift:nth-child(1) .ribbon { background: #d84315; }
         .gift:nth-child(2) .ribbon { background: #f57c00; }
         .gift:nth-child(3) .ribbon { background: #1e88e5; }
 
-        /* Pita Atas */
-        .ribbon-top {
+        .gift.open .lid {
+            transform: translateY(-40px) rotate(-20deg);
+        }
+
+        .surprise {
             position: absolute;
-            width: 60px;
-            height: 30px;
-            top: -22px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            clip-path: ellipse(50% 100% at 50% 0%);
-        }
-
-        .gift:nth-child(1) .ribbon-top { background: #d84315; }
-        .gift:nth-child(2) .ribbon-top { background: #f57c00; }
-        .gift:nth-child(3) .ribbon-top { background: #1e88e5; }
-
-        /* Motif di kado */
-        .gift::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 10%, transparent 20%);
-            background-size: 15px 15px;
-            border-radius: 10px;
-        }
-
-        /* Efek Kembang Api */
-        .firework {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: yellow;
-            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 18px;
+            color: white;
             opacity: 0;
-            animation: fireworks 1.5s infinite;
+            transition: opacity 0.5s, transform 0.5s;
         }
 
-        @keyframes fireworks {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(3);
-            }
+        .gift.open .surprise {
+            opacity: 1;
+            transform: translate(-50%, -100%) scale(1);
         }
 
-        /* Pembuat */
         .creator {
             margin-top: 20px;
             font-size: 16px;
@@ -159,83 +151,75 @@
             text-align: center;
         }
 
-        /* Responsif untuk HP */
-        @media (max-width: 480px) {
-            .title {
-                font-size: 22px;
-            }
+        /* Efek serpihan ulang tahun */
+        .confetti {
+            position: absolute;
+            top: -10px;
+            width: 8px;
+            height: 8px;
+            background-color: red;
+            opacity: 0.8;
+            transform: rotate(45deg);
+            animation: fall linear infinite;
+        }
 
-            .subtitle {
-                font-size: 18px;
-                margin-bottom: 20px;
-            }
-
-            .gift {
-                width: 60px;
-                height: 60px;
-            }
-
-            .gift::before {
-                height: 15px;
-            }
-
-            .ribbon {
-                width: 10px;
-            }
-
-            .ribbon-top {
-                width: 45px;
-                height: 20px;
-            }
-
-            .creator {
-                font-size: 14px;
-            }
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(90deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="title">🎉Happy Birthday🎁</div>
-    <div class="subtitle">💝Sayangkuu Cintaakuu❤️</div>
+    <div class="title">🎉 Happy Birthday 🎁</div>
+    <div class="subtitle">💝 Sayaaangkuu Cintaakuu ❤️</div>
 
     <div class="gift-container">
-        <div class="gift" onclick="window.location.href='halaman_surat.html'">
+        <div class="gift" onclick="openGift(this, 'halaman_surat.html')">
+            <div class="lid"></div>
             <div class="ribbon"></div>
-            <div class="ribbon-top"></div>
+            <div class="surprise">📜 Surat!</div>
         </div>
-        <div class="gift" onclick="window.location.href='halaman_pohon.html'"> <!-- Kado Tengah Menuju Halaman Pohon -->
+        <div class="gift" onclick="openGift(this, 'halaman_pohon.html')">
+            <div class="lid"></div>
             <div class="ribbon"></div>
-            <div class="ribbon-top"></div>
+            <div class="surprise">🌷 Bunga!</div>
         </div>
-        <div class="gift" onclick="window.location.href='halaman_special.html'">
+        <div class="gift" onclick="openGift(this, 'halaman_special.html')">
+            <div class="lid"></div>
             <div class="ribbon"></div>
-            <div class="ribbon-top"></div>
+            <div class="surprise">💖 Spesial!</div>
         </div>
     </div>
 
     <p class="creator">Pembuat: Arta Ganteng 😎🔥</p>
 
     <script>
-        function createFirework() {
-            const firework = document.createElement("div");
-            firework.classList.add("firework");
-            document.body.appendChild(firework);
-
-            const x = Math.random() * window.innerWidth;
-            const y = Math.random() * window.innerHeight;
-            const delay = Math.random() * 1.5;
-
-            firework.style.left = `${x}px`;
-            firework.style.top = `${y}px`;
-            firework.style.animationDelay = `${delay}s`;
-
-            setTimeout(() => {
-                firework.remove();
-            }, 1500);
+        function openGift(element, link) {
+            if (!element.classList.contains("open")) {
+                element.classList.add("open");
+                setTimeout(() => {
+                    window.location.href = link;
+                }, 1500);
+            }
         }
 
-        setInterval(createFirework, 300);
+        // Fungsi buat serpihan ulang tahun
+        function createConfetti() {
+            const colors = ["red", "blue", "yellow", "green", "purple", "orange", "pink"];
+            for (let i = 0; i < 50; i++) { // Jumlah serpihan
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        createConfetti();
+        setInterval(createConfetti, 3000);
     </script>
 
 </body>
