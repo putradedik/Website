@@ -175,17 +175,17 @@
     <div class="subtitle">💝 Sayaaangkuu Cintaakuu ❤️</div>
 
     <div class="gift-container">
-        <div class="gift" onclick="openGift(this, 'halaman_surat.html')">
+        <div class="gift" data-id="1" onclick="openGift(this, 'halaman_surat.html')">
             <div class="lid"></div>
             <div class="ribbon"></div>
             <div class="surprise">📜 Surat!</div>
         </div>
-        <div class="gift" onclick="openGift(this, 'halaman_pohon.html')">
+        <div class="gift" data-id="2" onclick="openGift(this, 'halaman_pohon.html')">
             <div class="lid"></div>
             <div class="ribbon"></div>
             <div class="surprise">🌷 Bunga!</div>
         </div>
-        <div class="gift" onclick="openGift(this, 'halaman_special.html')">
+        <div class="gift" data-id="3" onclick="openGift(this, 'halaman_special.html')">
             <div class="lid"></div>
             <div class="ribbon"></div>
             <div class="surprise">💖 Spesial!</div>
@@ -196,12 +196,23 @@
 
     <script>
         function openGift(element, link) {
-            if (!element.classList.contains("open")) {
-                element.classList.add("open");
-                setTimeout(() => {
-                    window.location.href = link;
-                }, 1500);
-            }
+            let giftId = element.getAttribute("data-id");
+            localStorage.setItem("giftOpened-" + giftId, "true");
+            element.classList.add("open");
+
+            setTimeout(() => {
+                window.location.href = link;
+            }, 1500);
+        }
+
+        function resetGifts() {
+            document.querySelectorAll(".gift").forEach(gift => {
+                let giftId = gift.getAttribute("data-id");
+                if (localStorage.getItem("giftOpened-" + giftId) === "true") {
+                    gift.classList.remove("open");
+                    localStorage.removeItem("giftOpened-" + giftId);
+                }
+            });
         }
 
         // Fungsi buat serpihan ulang tahun
@@ -218,8 +229,11 @@
             }
         }
 
-        createConfetti();
-        setInterval(createConfetti, 3000);
+        window.onload = function () {
+            resetGifts();  
+            createConfetti();  // Jalankan confetti setiap kali halaman dimuat ulang
+            setInterval(createConfetti, 3000);  // Supaya serpihan muncul terus
+        };
     </script>
 
 </body>
