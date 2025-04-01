@@ -64,9 +64,37 @@
             transform: scale(1.1);
         }
 
-        .gift:nth-child(1) { background-color: #ff6f61; background-image: radial-gradient(white 10%, transparent 10%); background-size: 15px 15px; }
-        .gift:nth-child(2) { background-color: #ffb74d; background-image: repeating-linear-gradient(45deg, white, white 10px, transparent 10px, transparent 20px); }
-        .gift:nth-child(3) { background-color: #64b5f6; background-image: linear-gradient(135deg, white 25%, transparent 25%, transparent 50%, white 50%, white 75%, transparent 75%, transparent); background-size: 20px 20px; }
+        .gift:nth-child(1) {
+            background-color: #ff6f61;
+            background-image: radial-gradient(white 10%, transparent 10%);
+            background-size: 15px 15px;
+        }
+
+        .gift:nth-child(2) {
+            background-color: #ffb74d;
+            background-image: repeating-linear-gradient(
+                45deg,
+                white,
+                white 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        .gift:nth-child(3) {
+            background-color: #64b5f6;
+            background-image: linear-gradient(
+                135deg,
+                white 25%,
+                transparent 25%,
+                transparent 50%,
+                white 50%,
+                white 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 20px 20px;
+        }
 
         .lid {
             position: absolute;
@@ -94,7 +122,9 @@
         .gift:nth-child(2) .ribbon { background: #f57c00; }
         .gift:nth-child(3) .ribbon { background: #1e88e5; }
 
-        .gift.open .lid { transform: translateY(-40px) rotate(-20deg); }
+        .gift.open .lid {
+            transform: translateY(-40px) rotate(-20deg);
+        }
 
         .surprise {
             position: absolute;
@@ -120,7 +150,6 @@
             text-align: center;
         }
 
-        /* Efek serpihan ulang tahun */
         .confetti {
             position: absolute;
             top: -10px;
@@ -165,23 +194,15 @@
 
     <script>
         function openGift(element, link) {
-            let giftId = element.getAttribute("data-id");
-            sessionStorage.setItem("giftOpened-" + giftId, "true"); // Simpan di sessionStorage
             element.classList.add("open");
+
+            setTimeout(() => {
+                element.classList.remove("open"); // Menutup kembali setelah 1 detik
+            }, 1000);
 
             setTimeout(() => {
                 window.location.href = link;
             }, 1500);
-        }
-
-        function resetGifts() {
-            document.querySelectorAll(".gift").forEach(gift => {
-                let giftId = gift.getAttribute("data-id");
-                if (sessionStorage.getItem("giftOpened-" + giftId)) {
-                    gift.classList.remove("open"); // Pastikan kado tertutup
-                    sessionStorage.removeItem("giftOpened-" + giftId);
-                }
-            });
         }
 
         function createConfetti() {
@@ -198,8 +219,7 @@
         }
 
         window.onload = function () {
-            resetGifts();  
-            createConfetti();  
+            createConfetti();
             setInterval(createConfetti, 3000);
         };
     </script>
