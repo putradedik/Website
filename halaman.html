@@ -64,6 +64,7 @@
             transform: scale(1.1);
         }
 
+        /* Motif dan warna kado */
         .gift:nth-child(1) {
             background-color: #ff6f61;
             background-image: radial-gradient(white 10%, transparent 10%);
@@ -149,22 +150,6 @@
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
             text-align: center;
         }
-
-        .confetti {
-            position: absolute;
-            top: -10px;
-            width: 8px;
-            height: 8px;
-            background-color: red;
-            opacity: 0.8;
-            transform: rotate(45deg);
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(45deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(90deg); opacity: 0; }
-        }
     </style>
 </head>
 <body>
@@ -194,34 +179,26 @@
 
     <script>
         function openGift(element, link) {
-            element.classList.add("open");
+            let giftId = element.getAttribute("data-id");
+
+            element.classList.add("open"); // Membuka kado
 
             setTimeout(() => {
                 element.classList.remove("open"); // Menutup kembali setelah 1 detik
-            }, 1000);
+            }, 3000);
 
             setTimeout(() => {
-                window.location.href = link;
+                window.location.href = link; // Pindah halaman setelah 1.5 detik
             }, 1500);
         }
 
-        function createConfetti() {
-            const colors = ["red", "blue", "yellow", "green", "purple", "orange", "pink"];
-            for (let i = 0; i < 50; i++) {
-                let confetti = document.createElement("div");
-                confetti.classList.add("confetti");
-                confetti.style.left = Math.random() * 100 + "vw";
-                confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                document.body.appendChild(confetti);
-                setTimeout(() => confetti.remove(), 5000);
-            }
+        function resetGifts() {
+            document.querySelectorAll(".gift").forEach(gift => {
+                gift.classList.remove("open");
+            });
         }
 
-        window.onload = function () {
-            createConfetti();
-            setInterval(createConfetti, 3000);
-        };
+        window.onload = resetGifts;
     </script>
 
 </body>
