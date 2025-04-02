@@ -162,6 +162,17 @@
                 font-size: 16px;
                 padding: 10px 16px;
             }
+            /* Tampilkan 2 gambar per baris di HP */
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Untuk layar sangat kecil, 1 gambar per baris */
+        @media (max-width: 480px) {
+            .gallery-container {
+                grid-template-columns: repeat(1, 1fr);
+            }
         }
     </style>
 </head>
@@ -179,14 +190,6 @@
                 <p class="card-title">GOR KEBO IWA</p>
                 <p class="card-desc">🥰😘🎨</p>
             </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">2.5K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">324</span>
-                </div>
-            </div>
         </div>
 
         <div class="card">
@@ -194,14 +197,6 @@
             <div class="card-content">
                 <p class="card-title">SMKN 1 GIANYAR</p>
                 <p class="card-desc">Fun Run Animasi🌿</p>
-            </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">5K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">64</span>
-                </div>
             </div>
         </div>
 
@@ -211,14 +206,6 @@
                 <p class="card-title">PURA BESAKIH</p>
                 <p class="card-desc">Tirta Yatra Animasi🍃</p>
             </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">2K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">32</span>
-                </div>
-            </div>
         </div>
 
         <div class="card">
@@ -227,14 +214,6 @@
                 <p class="card-title">GOR KEBO IWA</p>
                 <p class="card-desc">🫶😍🌷🍃</p>
             </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">3.4K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">24</span>
-                </div>
-            </div>
         </div>
 
         <div class="card">
@@ -242,14 +221,6 @@
             <div class="card-content">
                 <p class="card-title">SMKN 1 GIANYAR</p>
                 <p class="card-desc">Fun Run🏃‍➡️🥰🍂🍂</p>
-            </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">9K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">94</span>
-                </div>
             </div>
         </div>
     </div>
