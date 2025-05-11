@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Game</title>
+    <title>Happy Mood</title>
     <style>
         * {
             margin: 0;
@@ -33,6 +33,7 @@
         .container {
             display: flex;
             gap: 30px;
+            flex-wrap: wrap;
         }
         .icon-box {
             width: 120px;
@@ -62,7 +63,7 @@
             100% { transform: rotate(0deg); }
         }
         .bunga::before {
-            content: "🌸";
+            content: "🌷";
             display: inline-block;
             animation: rotateFlower 3s infinite ease-in-out;
         }
@@ -78,6 +79,17 @@
             content: "🧸";
             display: inline-block;
             animation: shakeTeddy 2s infinite ease-in-out;
+        }
+
+        /* Animasi Topi Ulang Tahun Melompat */
+        @keyframes bounceHat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .topi::before {
+            content: "🎉🎈";
+            display: inline-block;
+            animation: bounceHat 1.5s infinite;
         }
 
         .label {
@@ -118,6 +130,10 @@
         <div class="icon-container" onclick="openPage('claw-machine.html')">
             <div class="icon-box boneka"></div>
             <div class="label">Mesin Capit</div>
+        </div>
+        <div class="icon-container" onclick="openPage('surprise.html')">
+            <div class="icon-box topi"></div>
+            <div class="label">Surprise</div>
         </div>
     </div>
 
