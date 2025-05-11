@@ -123,6 +123,44 @@
         .menu a:hover {
             background: #ff3a57;
         }
+
+        /* Modal/Lightbox */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+
+        .modal-content {
+            display: block;
+            margin: auto;
+            max-width: 80%;
+            max-height: 80%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #bbb;
+        }
     </style>
 </head>
 <body>
@@ -132,7 +170,7 @@
 
     <div class="gallery-container">
         <div class="card">
-            <img src="bersama1.jpeg" alt="Fun Run">
+            <img src="bersama1.jpeg" alt="Fun Run" onclick="openModal(this)">
             <div class="card-content">
                 <p class="card-title">SMKN 1 GIANYAR</p>
                 <p class="card-desc">Fun Run Hut Sekolah🤪🔥🏃‍➡️</p>
@@ -148,7 +186,7 @@
         </div>
 
         <div class="card">
-            <img src="bersama2.jpeg" alt="Bayangan">
+            <img src="bersama2.jpeg" alt="Bayangan" onclick="openModal(this)">
             <div class="card-content">
                 <p class="card-title">SMKN 1 GIANYAR</p>
                 <p class="card-desc">Fun Run Hut Sekolah🏃‍➡️🫣</p>
@@ -164,7 +202,7 @@
         </div>
 
         <div class="card">
-            <img src="bersama3.jpeg" alt="Pura Besakih">
+            <img src="bersama3.jpeg" alt="Pura Besakih" onclick="openModal(this)">
             <div class="card-content">
                 <p class="card-title">SMKN 1 GIANYAR</p>
                 <p class="card-desc">Fun Run Hut Sekolah🏃‍➡️😐</p>
@@ -180,7 +218,7 @@
         </div>
 
         <div class="card">
-            <img src="bersama4.jpeg" alt="Gor">
+            <img src="bersama4.jpeg" alt="Gor" onclick="openModal(this)">
             <div class="card-content">
                 <p class="card-title">Gor Kebo Iwa</p>
                 <p class="card-desc">😏😐</p>
@@ -196,7 +234,7 @@
         </div>
 
         <div class="card">
-            <img src="bersama5.jpeg" alt="Gor">
+            <img src="bersama5.jpeg" alt="Gor" onclick="openModal(this)">
             <div class="card-content">
                 <p class="card-title">Pura Besakih</p>
                 <p class="card-desc">Tirta Yatra😍😘💝</p>
@@ -212,7 +250,7 @@
         </div>
 
         <div class="card">
-            <img src="bersama6.jpeg" alt="Lokasi Baru">
+            <img src="bersama6.jpeg" alt="Lokasi Baru" onclick="openModal(this)">
             <div class="card-content">
                 <p class="card-title">Gor kebo Iwa</p>
                 <p class="card-desc">Tidak Terlihat🫣🧐</p>
@@ -228,7 +266,7 @@
         </div>
 
     <div class="card">
-        <img src="bersama7.jpeg" alt="Lokasi Baru">
+        <img src="bersama7.jpeg" alt="Lokasi Baru" onclick="openModal(this)">
         <div class="card-content">
             <p class="card-title">Gor kebo Iwa</p>
             <p class="card-desc">Foto Bayangan🤪❤️</p>
@@ -244,7 +282,7 @@
     </div>
 
 <div class="card">
-    <img src="bersama8.jpeg" alt="Lokasi Baru">
+    <img src="bersama8.jpeg" alt="Lokasi Baru" onclick="openModal(this)">
     <div class="card-content">
         <p class="card-title">Gor kebo Iwa</p>
         <p class="card-desc">🫣😐</p>
@@ -260,7 +298,7 @@
 </div>
 
 <div class="card">
-    <img src="bersama9.jpeg" alt="Lokasi Baru">
+    <img src="bersama9.jpeg" alt="Lokasi Baru" onclick="openModal(this)">
     <div class="card-content">
         <p class="card-title">Gor kebo Iwa</p>
         <p class="card-desc">🥰🫶</p>
@@ -274,10 +312,21 @@
         </div>
     </div>
 </div>
+</div>
+
+    <!-- Modal untuk gambar besar -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="expandedImg">
+    </div>
 
     <!-- Menu Pindah ke Bawah -->
     <div class="menu">
         <a href="halaman.html">🎁 Lihat Kado Lain</a>
+    </div>
+
+    <div class="menu">
+        <a href="ghibli.html">🎨 Lihat Versi Animasi</a>
     </div>
 
     <script>
@@ -291,11 +340,29 @@
                 }
             });
         });
-    </script>
 
-<div class="menu">
-    <a href="ghibli.html">🎨 Lihat Versi Animasi</a>
-</div>
+        // Fungsi untuk membuka modal gambar
+        function openModal(imgElement) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("expandedImg");
+            
+            modal.style.display = "block";
+            modalImg.src = imgElement.src;
+        }
+
+        // Fungsi untuk menutup modal gambar
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+        // Tutup modal ketika mengklik di luar gambar
+        window.onclick = function(event) {
+            const modal = document.getElementById("imageModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
