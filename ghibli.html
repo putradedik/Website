@@ -175,6 +175,45 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        /* Modal untuk zoom gambar */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            display: block;
+            margin: auto;
+            max-width: 80%;
+            max-height: 80%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #bbb;
+        }
     </style>
 </head>
 <body>
@@ -186,7 +225,7 @@
 
     <div class="gallery-container">
         <div class="card">
-            <img src="disney1.jpeg" alt="Artaa Disney">
+            <img src="disney1.jpeg" alt="Artaa Disney" onclick="zoomImage(this)">
             <div class="card-content">
                 <p class="card-title">I Putu Arta Wijaya Putra</p>
                 <p class="card-desc">🔥🔥</p>
@@ -202,7 +241,7 @@
         </div>
 
         <div class="card">
-            <img src="disney2.jpeg" alt="Imelia Disney">
+            <img src="disney2.jpeg" alt="Imelia Disney" onclick="zoomImage(this)">
             <div class="card-content">
                 <p class="card-title">Komang Imelia Kartika Putri</p>
                 <p class="card-desc">😍🫶</p>
@@ -218,7 +257,7 @@
         </div>
 
         <div class="card">
-            <img src="disney3.jpeg" alt="Gor Disney">
+            <img src="disney3.jpeg" alt="Gor Disney" onclick="zoomImage(this)">
             <div class="card-content">
                 <p class="card-title">Gor Kobo Iwa</p>
                 <p class="card-desc">🌲🍁🍃</p>
@@ -234,7 +273,7 @@
         </div>
 
         <div class="card">
-            <img src="disney4.jpeg" alt="Gor Disney">
+            <img src="disney4.jpeg" alt="Gor Disney" onclick="zoomImage(this)">
             <div class="card-content">
                 <p class="card-title">Gor Kebo Iwa</p>
                 <p class="card-desc">🍂🍁🌷</p>
@@ -250,7 +289,7 @@
         </div>
 
         <div class="card">
-            <img src="disney5.jpeg" alt="SMKN 1 GIANYAR DISNEY">
+            <img src="disney5.jpeg" alt="SMKN 1 GIANYAR DISNEY" onclick="zoomImage(this)">
             <div class="card-content">
                 <p class="card-title">Smkn 1 Gianyar</p>
                 <p class="card-desc">Fun Run🏃‍➡️🍂🥰🍃</p>
@@ -266,7 +305,7 @@
         </div>
 
         <div class="card">
-            <img src="disney6.jpeg" alt="SMKN 1 GIANYAR DISNEY">
+            <img src="disney6.jpeg" alt="SMKN 1 GIANYAR DISNEY" onclick="zoomImage(this)">
             <div class="card-content">
                 <p class="card-title">Smkn 1 Gianyar</p>
                 <p class="card-desc">Fun Run🏃‍➡️🍂😘</p>
@@ -282,7 +321,7 @@
         </div>
 
         <div class="card">
-            <img src="disney7.jpeg" alt="Pura Besakih DISNEY">
+            <img src="disney7.jpeg" alt="Pura Besakih DISNEY" onclick="zoomImage(this)">
             <div class="card-content">
                 <p class="card-title">Pura Besakih</p>
                 <p class="card-desc">Tirta Yatra😍🍂😘</p>
@@ -298,6 +337,12 @@
         </div>
     </div>
 
+    <!-- Modal untuk zoom gambar -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="zoomedImage">
+    </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const music = document.getElementById("music");
@@ -309,6 +354,28 @@
                 }
             });
         });
+
+        // Fungsi untuk zoom gambar
+        function zoomImage(img) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("zoomedImage");
+            
+            modal.style.display = "block";
+            modalImg.src = img.src;
+        }
+
+        // Fungsi untuk menutup modal
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+        // Tutup modal ketika mengklik di luar gambar
+        window.onclick = function(event) {
+            const modal = document.getElementById("imageModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 
     <!-- Tombol Kembali ke Album -->
