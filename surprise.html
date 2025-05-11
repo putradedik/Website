@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy sayaang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #333;
+      margin: 0;
+      padding: 0;
+      font-family: 'Anton', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      color: white;
+    }
+
+    .open-btn {
+      font-size: 30px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: orange;
+      color: white;
+      cursor: pointer;
+      margin-top: 40vh;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .title {
+      font-size: 48px;
+      color: #fff;
+      margin-top: 20px;
+      animation: fadeInDown 1.5s ease-in-out, glow 2s infinite alternate;
+    }
+
+    .title span {
+      display: block;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #fff; }
+      to { text-shadow: 0 0 15px #fff, 0 0 30px #ff69b4, 0 0 40px #ff69b4; }
+    }
+
+    .photo-line {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .photo-wrapper {
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+
+    .photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.5);
+      animation: bounceIn 1s ease-in-out;
+      cursor: pointer;
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.3);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .plaster {
+      position: absolute;
+      width: 30px;
+      height: 12px;
+      background: #f0e4d0;
+      border-radius: 6px;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-10deg);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .cake {
+      position: relative;
+      margin: 60px auto;
+      width: 250px;
+      height: 200px;
+    }
+
+    .plate {
+      width: 270px;
+      height: 110px;
+      position: absolute;
+      bottom: -10px;
+      left: -10px;
+      background-color: #ccc;
+      border-radius: 50%;
+      box-shadow: 0 2px 0 #999, 0 4px 0 #999, 0 5px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .layer {
+      position: absolute;
+      width: 250px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #553c13;
+    }
+
+    .layer-top { top: 0; }
+    .layer-middle { top: 33px; }
+    .layer-bottom { top: 66px; }
+
+    .icing {
+      top: 2px;
+      left: 5px;
+      background-color: #f0e4d0;
+      width: 240px;
+      height: 90px;
+      border-radius: 50%;
+      position: absolute;
+      z-index: 2;
+    }
+
+    .drip {
+      background-color: #f0e4d0;
+      position: absolute;
+    }
+
+    .drip1 { top: 53px; left: 5px; width: 40px; height: 48px; border-radius: 0 0 25px 25px; transform: skewY(15deg); }
+    .drip2 { top: 69px; left: 181px; width: 50px; height: 60px; border-radius: 0 0 25px 25px; transform: skewY(-15deg); }
+    .drip3 { top: 54px; left: 90px; width: 80px; height: 60px; border-radius: 0 0 40px 40px; }
+
+    /* Perubahan pada lilin dan api */
+    .candle {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      margin-left: -8px;
+      background: linear-gradient(to bottom, #ff8a00, #e52e71, #7B020B);
+      width: 16px;
+      height: 50px;
+      border-radius: 8px / 4px;
+      z-index: 10;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+
+    .flame {
+      position: absolute;
+      width: 20px;
+      height: 40px;
+      background: linear-gradient(to bottom, white, yellow, orange, red);
+      border-radius: 50% 50% 20% 20%;
+      top: -40px;
+      left: 50%;
+      margin-left: -10px;
+      box-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 200, 0, 0.6),
+        0 0 30px rgba(255, 100, 0, 0.4);
+      filter: blur(1px);
+      animation: flicker 0.5s ease-in-out infinite alternate;
+      transform-origin: center bottom;
+    }
+
+    @keyframes flicker {
+      0%, 100% { 
+        transform: scale(1) rotate(-2deg);
+        height: 40px;
+      }
+      25% { 
+        transform: scale(1.1) rotate(3deg);
+        height: 45px;
+      }
+      50% { 
+        transform: scale(0.9) rotate(-3deg);
+        height: 35px;
+      }
+      75% { 
+        transform: scale(1.05) rotate(2deg);
+        height: 42px;
+      }
+    }
+
+    .flame.off { display: none; }
+
+    /* Hiasan kue di atas icing */
+    .decoration {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      z-index: 3;
+    }
+
+    .decoration:nth-child(1) { top: 20px; left: 50px; background-color: #ff6b6b; }
+    .decoration:nth-child(2) { top: 15px; left: 100px; background-color: #6bff6b; }
+    .decoration:nth-child(3) { top: 25px; left: 150px; background-color: #6b6bff; }
+    .decoration:nth-child(4) { top: 10px; left: 200px; background-color: #ffff6b; }
+    .decoration:nth-child(5) { top: 30px; left: 80px; background-color: #ff6bff; }
+    .decoration:nth-child(6) { top: 18px; left: 170px; background-color: #6bffff; }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      top: -10px;
+      animation: fall 5s ease-out forwards;
+      opacity: 0.9;
+      z-index: 9999;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Zoom Overlay */
+    .zoom-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+
+    .zoom-overlay img {
+      max-width: 60%;
+      max-height: 60%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.5);
+      animation: fadeZoom 0.3s ease;
+    }
+
+    @keyframes fadeZoom {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @media (max-width: 500px) {
+      .title { font-size: 36px; }
+      .photo-wrapper { width: 60px; height: 60px; }
+      .cake { width: 200px; height: 170px; }
+      .layer, .icing { width: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <button class="open-btn" onclick="openSurprise()">Open 🎉</button>
+
+    <div id="content" class="hidden">
+      <div class="title">
+        <span>🎊Selamat🎊</span>
+        <span>🎉Ulang Tahun🎉</span>
+      </div>
+
+      <div class="photo-line">
+        <div class="photo-wrapper">
+          <div class="plaster"></div>
+          <img src="disney2.jpeg" class="photo">
+        </div>
+        <div class="photo-wrapper">
+          <div class="plaster"></div>
+          <img src="foto2.jpg" class="photo">
+        </div>
+        <div class="photo-wrapper">
+          <div class="plaster"></div>
+          <img src="foto3.jpg" class="photo">
+        </div>
+      </div>
+
+      <div class="cake">
+        <div class="plate"></div>
+        <div class="layer layer-bottom"></div>
+        <div class="layer layer-middle"></div>
+        <div class="layer layer-top"></div>
+        <div class="icing"></div>
+        <div class="drip drip1"></div>
+        <div class="drip drip2"></div>
+        <div class="drip drip3"></div>
+        
+        <!-- Hiasan kue -->
+        <div class="decoration"></div>
+        <div class="decoration"></div>
+        <div class="decoration"></div>
+        <div class="decoration"></div>
+        <div class="decoration"></div>
+        <div class="decoration"></div>
+        
+        <div class="candle" onclick="toggleFlame()">
+          <div id="flame" class="flame"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zoom overlay -->
+  <div id="zoomOverlay" class="zoom-overlay" onclick="closeZoom()">
+    <img id="zoomImage" src="" alt="Zoom Foto">
+  </div>
+
+  <!-- Audio untuk musik -->
+  <audio id="birthdayMusic" loop>
+    <source src="hbd.mp3" type="audio/mpeg">
+    Browser Anda tidak mendukung elemen audio.
+  </audio>
+
+  <script>
+    function openSurprise() {
+      document.querySelector('.open-btn').classList.add('hidden');
+      document.getElementById('content').classList.remove('hidden');
+      createConfetti();
+      playMusic();
+    }
+
+    function toggleFlame() {
+      const flame = document.getElementById('flame');
+      flame.classList.toggle('off');
+    }
+
+    function createConfetti() {
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        const size = Math.random() * 8 + 4;
+        confetti.style.width = size + 'px';
+        confetti.style.height = size + 'px';
+        confetti.style.animationDuration = (Math.random() * 2 + 4) + 's';
+        confetti.style.animationDelay = (Math.random() * 3) + 's';
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 7000);
+      }
+    }
+
+    function playMusic() {
+      const audio = document.getElementById('birthdayMusic');
+      audio.volume = 0.6;
+      audio.play().catch(e => {
+        console.log('Autoplay prevented:', e);
+        const playButton = document.createElement('button');
+        playButton.textContent = 'Play Music';
+        playButton.style.position = 'fixed';
+        playButton.style.bottom = '20px';
+        playButton.style.right = '20px';
+        playButton.style.zIndex = '10000';
+        playButton.style.padding = '10px 20px';
+        playButton.style.backgroundColor = '#ff416c';
+        playButton.style.color = 'white';
+        playButton.style.border = 'none';
+        playButton.style.borderRadius = '5px';
+        playButton.style.cursor = 'pointer';
+        playButton.onclick = () => {
+          audio.play();
+          playButton.remove();
+        };
+        document.body.appendChild(playButton);
+      });
+    }
+
+    // Zoom Foto
+    document.querySelectorAll('.photo').forEach(img => {
+      img.addEventListener('click', () => {
+        document.getElementById('zoomImage').src = img.src;
+        document.getElementById('zoomOverlay').style.display = 'flex';
+      });
+    });
+
+    function closeZoom() {
+      document.getElementById('zoomOverlay').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
