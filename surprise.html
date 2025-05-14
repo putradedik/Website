@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Happy sayaang</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
   <style>
     body {
@@ -12,12 +12,20 @@
       padding: 0;
       font-family: 'Anton', sans-serif;
       overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .container {
       text-align: center;
       padding: 20px;
       color: white;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     .open-btn {
@@ -28,8 +36,9 @@
       background-color: orange;
       color: white;
       cursor: pointer;
-      margin-top: 40vh;
       animation: pulse 1.2s infinite;
+      position: relative;
+      margin: 0 auto;
     }
 
     @keyframes pulse {
@@ -47,6 +56,7 @@
       color: #fff;
       margin-top: 20px;
       animation: fadeInDown 1.5s ease-in-out, glow 2s infinite alternate;
+      line-height: 1.2;
     }
 
     .title span {
@@ -73,14 +83,16 @@
       display: flex;
       justify-content: center;
       gap: 10px;
-      margin-top: 30px;
+      margin: 30px auto;
       flex-wrap: wrap;
+      max-width: 100%;
     }
 
     .photo-wrapper {
       position: relative;
       width: 80px;
       height: 80px;
+      flex-shrink: 0;
     }
 
     .photo {
@@ -122,11 +134,18 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
+    .cake-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+    }
+
     .cake {
       position: relative;
-      margin: 60px auto;
       width: 250px;
       height: 200px;
+      transform: scale(0.9);
     }
 
     .plate {
@@ -284,8 +303,8 @@
     }
 
     .zoom-overlay img {
-      max-width: 60%;
-      max-height: 60%;
+      max-width: 90%;
+      max-height: 90%;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(255,255,255,0.5);
       animation: fadeZoom 0.3s ease;
@@ -297,10 +316,58 @@
     }
 
     @media (max-width: 500px) {
-      .title { font-size: 36px; }
-      .photo-wrapper { width: 60px; height: 60px; }
-      .cake { width: 200px; height: 170px; }
-      .layer, .icing { width: 200px; }
+      body {
+        padding: 10px;
+      }
+      
+      .title { 
+        font-size: 32px;
+        margin-top: 10px;
+      }
+      
+      .photo-wrapper { 
+        width: 70px; 
+        height: 70px; 
+      }
+      
+      .cake { 
+        width: 200px; 
+        height: 170px; 
+        transform: scale(0.8);
+      }
+      
+      .layer, .icing { 
+        width: 200px; 
+      }
+      
+      .plate {
+        width: 220px;
+      }
+      
+      .icing {
+        width: 190px;
+      }
+      
+      .drip1 { left: 5px; }
+      .drip2 { left: 145px; }
+      
+      .decoration:nth-child(1) { left: 40px; }
+      .decoration:nth-child(2) { left: 80px; }
+      .decoration:nth-child(3) { left: 120px; }
+      .decoration:nth-child(4) { left: 160px; }
+      .decoration:nth-child(5) { left: 60px; }
+      .decoration:nth-child(6) { left: 140px; }
+    }
+    
+    @media (max-width: 350px) {
+      .title {
+        font-size: 28px;
+      }
+      
+      .photo-wrapper {
+        width: 60px;
+        height: 60px;
+      }
     }
   </style>
 </head>
@@ -330,26 +397,28 @@
         </div>
       </div>
 
-      <div class="cake">
-        <div class="plate"></div>
-        <div class="layer layer-bottom"></div>
-        <div class="layer layer-middle"></div>
-        <div class="layer layer-top"></div>
-        <div class="icing"></div>
-        <div class="drip drip1"></div>
-        <div class="drip drip2"></div>
-        <div class="drip drip3"></div>
-        
-        <!-- Hiasan kue -->
-        <div class="decoration"></div>
-        <div class="decoration"></div>
-        <div class="decoration"></div>
-        <div class="decoration"></div>
-        <div class="decoration"></div>
-        <div class="decoration"></div>
-        
-        <div class="candle" onclick="toggleFlame()">
-          <div id="flame" class="flame"></div>
+      <div class="cake-container">
+        <div class="cake">
+          <div class="plate"></div>
+          <div class="layer layer-bottom"></div>
+          <div class="layer layer-middle"></div>
+          <div class="layer layer-top"></div>
+          <div class="icing"></div>
+          <div class="drip drip1"></div>
+          <div class="drip drip2"></div>
+          <div class="drip drip3"></div>
+          
+          <!-- Hiasan kue -->
+          <div class="decoration"></div>
+          <div class="decoration"></div>
+          <div class="decoration"></div>
+          <div class="decoration"></div>
+          <div class="decoration"></div>
+          <div class="decoration"></div>
+          
+          <div class="candle" onclick="toggleFlame()">
+            <div id="flame" class="flame"></div>
+          </div>
         </div>
       </div>
     </div>
