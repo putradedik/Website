@@ -30,7 +30,7 @@
 
     .open-btn {
       font-size: 30px;
-      padding: 10px 20px;
+      padding: 15px 30px;
       border: none;
       border-radius: 10px;
       background-color: orange;
@@ -82,7 +82,7 @@
     .photo-line {
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 15px;
       margin: 30px auto;
       flex-wrap: wrap;
       max-width: 100%;
@@ -90,8 +90,8 @@
 
     .photo-wrapper {
       position: relative;
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       flex-shrink: 0;
     }
 
@@ -124,11 +124,11 @@
 
     .plaster {
       position: absolute;
-      width: 30px;
-      height: 12px;
+      width: 40px;
+      height: 15px;
       background: #f0e4d0;
-      border-radius: 6px;
-      top: -8px;
+      border-radius: 8px;
+      top: -10px;
       left: 50%;
       transform: translateX(-50%) rotate(-10deg);
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -138,19 +138,18 @@
       width: 100%;
       display: flex;
       justify-content: center;
-      margin: 30px 0;
+      margin: 40px 0;
     }
 
     .cake {
       position: relative;
-      width: 250px;
-      height: 200px;
-      transform: scale(0.9);
+      width: 300px;
+      height: 240px;
     }
 
     .plate {
-      width: 270px;
-      height: 110px;
+      width: 320px;
+      height: 130px;
       position: absolute;
       bottom: -10px;
       left: -10px;
@@ -161,22 +160,22 @@
 
     .layer {
       position: absolute;
-      width: 250px;
-      height: 100px;
+      width: 300px;
+      height: 120px;
       border-radius: 50%;
       background-color: #553c13;
     }
 
     .layer-top { top: 0; }
-    .layer-middle { top: 33px; }
-    .layer-bottom { top: 66px; }
+    .layer-middle { top: 40px; }
+    .layer-bottom { top: 80px; }
 
     .icing {
       top: 2px;
       left: 5px;
       background-color: #f0e4d0;
-      width: 240px;
-      height: 90px;
+      width: 290px;
+      height: 110px;
       border-radius: 50%;
       position: absolute;
       z-index: 2;
@@ -187,20 +186,20 @@
       position: absolute;
     }
 
-    .drip1 { top: 53px; left: 5px; width: 40px; height: 48px; border-radius: 0 0 25px 25px; transform: skewY(15deg); }
-    .drip2 { top: 69px; left: 181px; width: 50px; height: 60px; border-radius: 0 0 25px 25px; transform: skewY(-15deg); }
-    .drip3 { top: 54px; left: 90px; width: 80px; height: 60px; border-radius: 0 0 40px 40px; }
+    .drip1 { top: 63px; left: 5px; width: 50px; height: 58px; border-radius: 0 0 25px 25px; transform: skewY(15deg); }
+    .drip2 { top: 83px; left: 221px; width: 60px; height: 72px; border-radius: 0 0 25px 25px; transform: skewY(-15deg); }
+    .drip3 { top: 65px; left: 110px; width: 100px; height: 72px; border-radius: 0 0 40px 40px; }
 
     /* Perubahan pada lilin dan api */
     .candle {
       position: absolute;
-      top: -20px;
+      top: -25px;
       left: 50%;
-      margin-left: -8px;
+      margin-left: -10px;
       background: linear-gradient(to bottom, #ff8a00, #e52e71, #7B020B);
-      width: 16px;
-      height: 50px;
-      border-radius: 8px / 4px;
+      width: 20px;
+      height: 60px;
+      border-radius: 10px / 5px;
       z-index: 10;
       cursor: pointer;
       box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
@@ -208,17 +207,17 @@
 
     .flame {
       position: absolute;
-      width: 20px;
-      height: 40px;
+      width: 25px;
+      height: 50px;
       background: linear-gradient(to bottom, white, yellow, orange, red);
       border-radius: 50% 50% 20% 20%;
-      top: -40px;
+      top: -50px;
       left: 50%;
-      margin-left: -10px;
+      margin-left: -12px;
       box-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.8),
-        0 0 20px rgba(255, 200, 0, 0.6),
-        0 0 30px rgba(255, 100, 0, 0.4);
+        0 0 15px rgba(255, 255, 255, 0.8),
+        0 0 25px rgba(255, 200, 0, 0.6),
+        0 0 35px rgba(255, 100, 0, 0.4);
       filter: blur(1px);
       animation: flicker 0.5s ease-in-out infinite alternate;
       transform-origin: center bottom;
@@ -227,19 +226,19 @@
     @keyframes flicker {
       0%, 100% { 
         transform: scale(1) rotate(-2deg);
-        height: 40px;
+        height: 50px;
       }
       25% { 
         transform: scale(1.1) rotate(3deg);
-        height: 45px;
+        height: 55px;
       }
       50% { 
         transform: scale(0.9) rotate(-3deg);
-        height: 35px;
+        height: 45px;
       }
       75% { 
         transform: scale(1.05) rotate(2deg);
-        height: 42px;
+        height: 52px;
       }
     }
 
@@ -248,23 +247,23 @@
     /* Hiasan kue di atas icing */
     .decoration {
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 15px;
+      height: 15px;
       border-radius: 50%;
       z-index: 3;
     }
 
-    .decoration:nth-child(1) { top: 20px; left: 50px; background-color: #ff6b6b; }
-    .decoration:nth-child(2) { top: 15px; left: 100px; background-color: #6bff6b; }
-    .decoration:nth-child(3) { top: 25px; left: 150px; background-color: #6b6bff; }
-    .decoration:nth-child(4) { top: 10px; left: 200px; background-color: #ffff6b; }
-    .decoration:nth-child(5) { top: 30px; left: 80px; background-color: #ff6bff; }
-    .decoration:nth-child(6) { top: 18px; left: 170px; background-color: #6bffff; }
+    .decoration:nth-child(1) { top: 25px; left: 60px; background-color: #ff6b6b; }
+    .decoration:nth-child(2) { top: 20px; left: 120px; background-color: #6bff6b; }
+    .decoration:nth-child(3) { top: 30px; left: 180px; background-color: #6b6bff; }
+    .decoration:nth-child(4) { top: 15px; left: 240px; background-color: #ffff6b; }
+    .decoration:nth-child(5) { top: 35px; left: 100px; background-color: #ff6bff; }
+    .decoration:nth-child(6) { top: 22px; left: 200px; background-color: #6bffff; }
 
     .confetti {
       position: fixed;
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       background-color: red;
       top: -10px;
       animation: fall 5s ease-out forwards;
@@ -315,59 +314,94 @@
       to { transform: scale(1); opacity: 1; }
     }
 
-    @media (max-width: 500px) {
-      body {
-        padding: 10px;
-      }
-      
+    @media (max-width: 600px) {
       .title { 
-        font-size: 32px;
-        margin-top: 10px;
+        font-size: 40px;
+        margin-top: 15px;
       }
       
       .photo-wrapper { 
-        width: 70px; 
-        height: 70px; 
+        width: 90px; 
+        height: 90px; 
+      }
+      
+      .plaster {
+        width: 35px;
+        height: 14px;
       }
       
       .cake { 
-        width: 200px; 
-        height: 170px; 
-        transform: scale(0.8);
+        width: 280px; 
+        height: 224px;
       }
       
       .layer, .icing { 
-        width: 200px; 
+        width: 280px; 
+      }
+      
+      .layer-middle { top: 37px; }
+      .layer-bottom { top: 74px; }
+      
+      .icing {
+        width: 270px;
+        height: 103px;
       }
       
       .plate {
-        width: 220px;
+        width: 300px;
+        height: 122px;
       }
       
-      .icing {
-        width: 190px;
-      }
+      .drip1 { top: 59px; left: 5px; }
+      .drip2 { top: 77px; left: 205px; }
+      .drip3 { top: 61px; left: 100px; width: 90px; }
       
-      .drip1 { left: 5px; }
-      .drip2 { left: 145px; }
-      
-      .decoration:nth-child(1) { left: 40px; }
-      .decoration:nth-child(2) { left: 80px; }
-      .decoration:nth-child(3) { left: 120px; }
-      .decoration:nth-child(4) { left: 160px; }
-      .decoration:nth-child(5) { left: 60px; }
-      .decoration:nth-child(6) { left: 140px; }
+      .decoration:nth-child(1) { left: 55px; }
+      .decoration:nth-child(2) { left: 110px; }
+      .decoration:nth-child(3) { left: 165px; }
+      .decoration:nth-child(4) { left: 220px; }
+      .decoration:nth-child(5) { left: 90px; }
+      .decoration:nth-child(6) { left: 180px; }
     }
     
-    @media (max-width: 350px) {
+    @media (max-width: 400px) {
       .title {
-        font-size: 28px;
+        font-size: 36px;
+      }
+      
+      .open-btn {
+        font-size: 26px;
+        padding: 12px 24px;
       }
       
       .photo-wrapper {
-        width: 60px;
-        height: 60px;
+        width: 80px;
+        height: 80px;
       }
+      
+      .cake {
+        width: 260px;
+        height: 208px;
+      }
+      
+      .layer, .icing {
+        width: 260px;
+      }
+      
+      .icing {
+        width: 250px;
+      }
+      
+      .plate {
+        width: 280px;
+      }
+      
+      .drip2 { left: 185px; }
+      
+      .decoration:nth-child(1) { left: 50px; }
+      .decoration:nth-child(2) { left: 100px; }
+      .decoration:nth-child(3) { left: 150px; }
+      .decoration:nth-child(4) { left: 200px; }
     }
   </style>
 </head>
@@ -454,7 +488,7 @@
         confetti.classList.add('confetti');
         confetti.style.left = Math.random() * 100 + 'vw';
         confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-        const size = Math.random() * 8 + 4;
+        const size = Math.random() * 10 + 6;
         confetti.style.width = size + 'px';
         confetti.style.height = size + 'px';
         confetti.style.animationDuration = (Math.random() * 2 + 4) + 's';
