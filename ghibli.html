@@ -3,433 +3,878 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Album Kenangan - Versi Animasi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <title>Album Kenangan - Versi Animasi Disney</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500&family=Luckiest+Guy&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #6d4c41;
+            --secondary: #d7ccc8;
+            --accent: #8d6e63;
+            --light: #efebe9;
+            --dark: #3e2723;
+            --text: #5d4037;
+            --disney-pink: #46002a;
+            --disney-blue: #00a1f1;
+            --disney-yellow: #ffbb00;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background: #bcbcbc;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            background-color: #f9f3ff;
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23f0d9ff" d="M30,10 Q50,5 70,10 T90,30 Q95,50 90,70 T70,90 Q50,95 30,90 T10,70 Q5,50 10,30 T30,10" opacity="0.1"/></svg>');
+            background-size: 150px;
         }
 
-        /* Animasi Judul */
-        .animated-title {
-            font-family: 'Luckiest Guy', cursive;
-            font-size: 25px;
-            color: #f85eba;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        .hero {
+            background: linear-gradient(to right, var(--disney-pink) 0%, var(--disney-blue) 100%);
+            color: white;
             text-align: center;
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeIn 1.2s ease-out forwards;
+            padding: 4rem 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
         }
 
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.1)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+            opacity: 0.2;
         }
 
-        .gallery-container {
+        .hero h1 {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+            position: relative;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
-            max-width: 900px;
-            width: 95%;
+            margin-bottom: 3rem;
         }
 
-        .card {
+        .memory-card {
             background: white;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 3px solid white;
         }
 
-        /* Efek Hover di Gambar */
-        .card img {
+        .memory-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border-color: var(--disney-yellow);
+        }
+
+        .memory-img {
             width: 100%;
-            height: 220px;
+            height: 250px;
             object-fit: cover;
-            transition: transform 0.3s ease-in-out;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.5s ease;
         }
 
-        .card:hover img {
+        .memory-card:hover .memory-img {
             transform: scale(1.1);
         }
 
-        .card-content {
-            padding: 10px;
-            text-align: center;
+        .memory-content {
+            padding: 15px;
+            position: relative;
+            background: white;
+            z-index: 1;
         }
 
-        .card-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
+        .memory-title {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            color: var(--disney-pink);
+            letter-spacing: 0.5px;
         }
 
-        .card-desc {
-            font-size: 12px;
-            color: #777;
-            margin-top: 3px;
+        .memory-desc {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.8rem;
         }
 
-        /* Footer dengan ikon love dan komen */
-        .card-footer {
+        .memory-stats {
             display: flex;
             justify-content: space-between;
-            padding: 8px 15px;
-            font-size: 14px;
-            color: #555;
-            align-items: center;
+            font-size: 0.8rem;
+            color: var(--disney-blue);
         }
 
-        .icon {
+        .memory-stats span {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
 
-        .icon span {
-            font-size: 14px;
-        }
-
-        .icon .love::before {
-            content: "❤️";
-            font-size: 16px;
-            margin-right: 5px;
-        }
-
-        .icon .comment::before {
-            content: "💬";
-            font-size: 16px;
-            margin-right: 5px;
-        }
-
-        /* Tombol Kembali ke Album */
-        .menu {
-            width: 100%;
+        .action-buttons {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            gap: 15px;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
         }
 
-        .menu a {
+        .btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
             text-decoration: none;
-            background: #ff5e78;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             text-align: center;
-            transition: 0.3s;
-            font-size: 18px;
-            display: inline-block;
+            font-family: 'Luckiest Guy', cursive;
+            letter-spacing: 1px;
         }
 
-        .menu a:hover {
-            background: #ff3a57;
-            transform: scale(1.1);
+        .btn-primary {
+            background: var(--disney-pink);
+            color: white;
+            box-shadow: 0 4px 12px rgba(248, 94, 186, 0.3);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .animated-title {
-                font-size: 24px;
-            }
-            .menu a {
-                font-size: 16px;
-                padding: 10px 16px;
-            }
-            /* Tampilkan 2 gambar per baris di HP */
-            .gallery-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .btn-primary:hover {
+            background: #85004d;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(248, 94, 186, 0.4);
         }
 
-        /* Untuk layar sangat kecil, tetap 2 gambar per baris */
-        @media (max-width: 480px) {
-            .gallery-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .btn-secondary {
+            background: white;
+            color: var(--disney-blue);
+            border: 2px solid var(--disney-blue);
         }
 
-        /* Modal untuk zoom gambar */
+        .btn-secondary:hover {
+            background: var(--disney-blue);
+            color: white;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 161, 241, 0.2);
+        }
+
+        /* Lightbox Modal */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            overflow: auto;
-            animation: fadeIn 0.3s;
+            background: rgba(0, 0, 0, 0.97);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 15px;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
         }
 
         .modal-content {
-            display: block;
-            margin: auto;
+            position: relative;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            animation: zoomIn 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-img {
+            max-width: 100%;
+            max-height: calc(100vh - 100px);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 6px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            border: 5px solid white;
+        }
+
+        .modal-caption {
+            color: white;
+            text-align: center;
+            margin-top: 15px;
             max-width: 80%;
-            max-height: 80%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            font-family: 'Luckiest Guy', cursive;
+        }
+
+        .modal-caption h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--disney-yellow);
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+        }
+
+        .modal-caption p {
+            font-size: 1rem;
+            opacity: 0.9;
         }
 
         .close {
             position: absolute;
             top: 20px;
-            right: 30px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            font-weight: 300;
             cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
         }
 
         .close:hover {
-            color: #bbb;
+            transform: rotate(90deg);
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            padding: 10px 16px;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            border: 2px solid var(--disney-pink);
+        }
+
+        .music-player.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .music-info {
+            font-size: 0.85rem;
+            color: var(--disney-pink);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+            font-weight: 500;
+        }
+
+        .music-control {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--disney-pink);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .music-control:hover {
+            background: var(--disney-blue);
+            transform: scale(1.1);
+        }
+
+        /* Floating Stars */
+        .floating-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            opacity: 0;
+            animation: float 6s ease-in infinite;
+            font-size: 20px;
+            color: var(--disney-yellow);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation Arrows */
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.4);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-family: 'Luckiest Guy', cursive;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: translateY(-50%) scale(1.1);
+            color: var(--disney-yellow);
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .memory-img {
+                height: 180px;
+            }
+            
+            .memory-content {
+                padding: 10px;
+            }
+            
+            .memory-title {
+                font-size: 1rem;
+            }
+            
+            .memory-desc {
+                font-size: 0.75rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .memory-stats {
+                font-size: 0.7rem;
+            }
+            
+            .action-buttons {
+                flex-direction: row;
+                gap: 10px;
+                align-items: center;
+            }
+            
+            .btn {
+                width: auto;
+                max-width: none;
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+            
+            .music-player {
+                bottom: 15px;
+                right: 15px;
+                padding: 8px 12px;
+            }
+            
+            .music-info {
+                max-width: 120px;
+                font-size: 0.8rem;
+            }
+            
+            .music-control {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .nav-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 2rem;
+            }
+            
+            .arrow-left {
+                left: 10px;
+            }
+            
+            .arrow-right {
+                right: 10px;
+            }
+            
+            .modal-img {
+                max-height: calc(100vh - 120px);
+            }
+            
+            .modal-caption {
+                max-width: 90%;
+            }
+            
+            .modal-caption h3 {
+                font-size: 1.3rem;
+            }
+            
+            .modal-caption p {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .gallery {
+                gap: 8px;
+            }
+            
+            .memory-img {
+                height: 150px;
+            }
+            
+            .modal-img {
+                max-height: calc(100vh - 140px);
+            }
+            
+            .close {
+                top: 10px;
+                right: 10px;
+                font-size: 1.8rem;
+                width: 35px;
+                height: 35px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Floating Stars Background -->
+    <div class="floating-stars" id="stars-container"></div>
 
-    <!-- Audio Musik -->
-    <audio id="music" src="ghibli.mp3"></audio>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Album Versi Animasi Disney</h1>  
+        </div>
+    </section>
 
-    <h2 class="animated-title">🌸 Album Versi Animasi Disney 🌸</h2>
-
-    <div class="gallery-container">
-        <div class="card">
-            <img src="disney1.jpeg" alt="Artaa Disney" onclick="zoomImage(this)">
-            <div class="card-content">
-                <p class="card-title">I Putu Arta Wijaya Putra</p>
-                <p class="card-desc">🔥🔥</p>
-            </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">2.5K</span>
+    <!-- Gallery Section -->
+    <div class="container">
+        <div class="gallery">
+            <div class="memory-card">
+                <img src="disney1.jpeg" alt="Arta Disney" class="memory-img" onclick="openModal(this, 'I Putu Arta Wijaya Putra', '🔥🔥')">
+                <div class="memory-content">
+                    <h3 class="memory-title">I Putu Arta Wijaya Putra</h3>
+                    <p class="memory-desc">🔥🔥</p>
+                    <div class="memory-stats">
+                        <span>❤️ 2.5K</span>
+                        <span>💬 324</span>
+                    </div>
                 </div>
-                <div class="icon">
-                    <span class="comment">324</span>
+            </div>
+
+            <div class="memory-card">
+                <img src="disney2.jpeg" alt="Imelia Disney" class="memory-img" onclick="openModal(this, 'Komang Imelia Kartika Putri', '😍🫶')">
+                <div class="memory-content">
+                    <h3 class="memory-title">Komang Imelia Kartika Putri</h3>
+                    <p class="memory-desc">😍🫶</p>
+                    <div class="memory-stats">
+                        <span>❤️ 2.5K</span>
+                        <span>💬 324</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <img src="disney3.jpeg" alt="Gor Disney" class="memory-img" onclick="openModal(this, 'Gor Kobo Iwa', '🌲🍁🍃')">
+                <div class="memory-content">
+                    <h3 class="memory-title">Gor Kobo Iwa</h3>
+                    <p class="memory-desc">🌲🍁🍃</p>
+                    <div class="memory-stats">
+                        <span>❤️ 1.2K</span>
+                        <span>💬 58</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <img src="disney4.jpeg" alt="Gor Disney" class="memory-img" onclick="openModal(this, 'Gor Kebo Iwa', '🍂🍁🌷')">
+                <div class="memory-content">
+                    <h3 class="memory-title">Gor Kebo Iwa</h3>
+                    <p class="memory-desc">🍂🍁🌷</p>
+                    <div class="memory-stats">
+                        <span>❤️ 3.6K</span>
+                        <span>💬 98</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <img src="disney5.jpeg" alt="SMKN 1 GIANYAR DISNEY" class="memory-img" onclick="openModal(this, 'Smkn 1 Gianyar', 'Fun Run🏃‍➡️🍂🥰🍃')">
+                <div class="memory-content">
+                    <h3 class="memory-title">Smkn 1 Gianyar</h3>
+                    <p class="memory-desc">Fun Run🏃‍➡️🍂🥰🍃</p>
+                    <div class="memory-stats">
+                        <span>❤️ 8K</span>
+                        <span>💬 18</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <img src="disney6.jpeg" alt="SMKN 1 GIANYAR DISNEY" class="memory-img" onclick="openModal(this, 'Smkn 1 Gianyar', 'Fun Run🏃‍➡️🍂😘')">
+                <div class="memory-content">
+                    <h3 class="memory-title">Smkn 1 Gianyar</h3>
+                    <p class="memory-desc">Fun Run🏃‍➡️🍂😘</p>
+                    <div class="memory-stats">
+                        <span>❤️ 5K</span>
+                        <span>💬 178</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <img src="disney7.jpeg" alt="Pura Besakih DISNEY" class="memory-img" onclick="openModal(this, 'Pura Besakih', 'Tirta Yatra😍🍂😘')">
+                <div class="memory-content">
+                    <h3 class="memory-title">Pura Besakih</h3>
+                    <p class="memory-desc">Tirta Yatra😍🍂😘</p>
+                    <div class="memory-stats">
+                        <span>❤️ 10K</span>
+                        <span>💬 198</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <img src="disney8.jpeg" alt="DISNEY" class="memory-img" onclick="openModal(this, 'SMKN 1 GIANYAR', '🙏😍😘')">
+                <div class="memory-content">
+                    <h3 class="memory-title">SMKN 1 GIANYAR</h3>
+                    <p class="memory-desc">🙏😍😘</p>
+                    <div class="memory-stats">
+                        <span>❤️ 19K</span>
+                        <span>💬 158</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <img src="disney9.jpeg" alt="DISNEY" class="memory-img" onclick="openModal(this, 'SMKN 1 GIANYAR', '😍🎓🏅😘')">
+                <div class="memory-content">
+                    <h3 class="memory-title">SMKN 1 GIANYAR</h3>
+                    <p class="memory-desc">😍🎓🏅😘</p>
+                    <div class="memory-stats">
+                        <span>❤️ 13K</span>
+                        <span>💬 191</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <img src="disney10.jpeg" alt="DISNEY" class="memory-img" onclick="openModal(this, 'SMKN 1 GIANYAR', '😍🎓🏅')">
+                <div class="memory-content">
+                    <h3 class="memory-title">SMKN 1 GIANYAR</h3>
+                    <p class="memory-desc">😍🎓🏅</p>
+                    <div class="memory-stats">
+                        <span>❤️ 16K</span>
+                        <span>💬 111</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <img src="disney2.jpeg" alt="Imelia Disney" onclick="zoomImage(this)">
-            <div class="card-content">
-                <p class="card-title">Komang Imelia Kartika Putri</p>
-                <p class="card-desc">😍🫶</p>
-            </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">2.5K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">324</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="disney3.jpeg" alt="Gor Disney" onclick="zoomImage(this)">
-            <div class="card-content">
-                <p class="card-title">Gor Kobo Iwa</p>
-                <p class="card-desc">🌲🍁🍃</p>
-            </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">1.2K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">58</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="disney4.jpeg" alt="Gor Disney" onclick="zoomImage(this)">
-            <div class="card-content">
-                <p class="card-title">Gor Kebo Iwa</p>
-                <p class="card-desc">🍂🍁🌷</p>
-            </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">3.6K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">98</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="disney5.jpeg" alt="SMKN 1 GIANYAR DISNEY" onclick="zoomImage(this)">
-            <div class="card-content">
-                <p class="card-title">Smkn 1 Gianyar</p>
-                <p class="card-desc">Fun Run🏃‍➡️🍂🥰🍃</p>
-            </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">8K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">18</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="disney6.jpeg" alt="SMKN 1 GIANYAR DISNEY" onclick="zoomImage(this)">
-            <div class="card-content">
-                <p class="card-title">Smkn 1 Gianyar</p>
-                <p class="card-desc">Fun Run🏃‍➡️🍂😘</p>
-            </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">5K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">178</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="disney7.jpeg" alt="Pura Besakih DISNEY" onclick="zoomImage(this)">
-            <div class="card-content">
-                <p class="card-title">Pura Besakih</p>
-                <p class="card-desc">Tirta Yatra😍🍂😘</p>
-            </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">10K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">198</span>
-                </div>
-            </div>
-        </div>
-
-               <div class="card">
-            <img src="disney8.jpeg" alt=" DISNEY" onclick="zoomImage(this)">
-            <div class="card-content">
-                <p class="card-title">SMKN 1 GIANYAR</p>
-                <p class="card-desc">🙏😍😘</p>
-            </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">19K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">158</span>
-                </div>
-            </div>
-        </div>
-
-               <div class="card">
-            <img src="disney9.jpeg" alt="DISNEY" onclick="zoomImage(this)">
-            <div class="card-content">
-                <p class="card-title">SMKN 1 GIANYAR</p>
-                <p class="card-desc">😍🎓🏅😘</p>
-            </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">13K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">191</span>
-                </div>
-            </div>
-        </div>
-
-                <div class="card">
-            <img src="disney10.jpeg" alt="DISNEY" onclick="zoomImage(this)">
-            <div class="card-content">
-                <p class="card-title">SMKN 1 GIANYAR</p>
-                <p class="card-desc">😍🎓🏅</p>
-            </div>
-            <div class="card-footer">
-                <div class="icon">
-                    <span class="love">16K</span>
-                </div>
-                <div class="icon">
-                    <span class="comment">111</span>
-                </div>
-            </div>
+        <div class="action-buttons">
+            <a href="halaman_special.html" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                    <rect x="2" y="7" width="20" height="5"></rect>
+                    <line x1="12" y1="22" x2="12" y2="7"></line>
+                    <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                    <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                </svg>
+                Kembali
+            </a>
         </div>
     </div>
 
-    <!-- Modal untuk zoom gambar -->
-    <div id="imageModal" class="modal">
+    <!-- Lightbox Modal -->
+    <div class="modal" id="imageModal">
         <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="zoomedImage">
+        <div class="nav-arrow arrow-left" onclick="navigate(-1)">
+            &larr;
+        </div>
+        <div class="modal-content">
+            <img class="modal-img" id="expandedImg">
+            <div class="modal-caption">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDesc"></p>
+            </div>
+        </div>
+        <div class="nav-arrow arrow-right" onclick="navigate(1)">
+            &rarr;
+        </div>
     </div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="music-info">Memutar: Lagu Disney</div>
+        <div class="music-control" onclick="toggleMusic()">
+            <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+        </div>
+    </div>
+
+    <audio id="music" loop>
+        <source src="ghibli.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const music = document.getElementById("music");
-            const gallery = document.querySelector(".gallery-container");
+        // Gallery data
+        const galleryItems = [
+            { img: 'disney1.jpeg', title: 'I Putu Arta Wijaya Putra', desc: '🔥🔥', likes: '2.5K', comments: '324' },
+            { img: 'disney2.jpeg', title: 'Komang Imelia Kartika Putri', desc: '😍🫶', likes: '2.5K', comments: '324' },
+            { img: 'disney3.jpeg', title: 'Gor Kobo Iwa', desc: '🌲🍁🍃', likes: '1.2K', comments: '58' },
+            { img: 'disney4.jpeg', title: 'Gor Kebo Iwa', desc: '🍂🍁🌷', likes: '3.6K', comments: '98' },
+            { img: 'disney5.jpeg', title: 'Smkn 1 Gianyar', desc: 'Fun Run🏃‍➡️🍂🥰🍃', likes: '8K', comments: '18' },
+            { img: 'disney6.jpeg', title: 'Smkn 1 Gianyar', desc: 'Fun Run🏃‍➡️🍂😘', likes: '5K', comments: '178' },
+            { img: 'disney7.jpeg', title: 'Pura Besakih', desc: 'Tirta Yatra😍🍂😘', likes: '10K', comments: '198' },
+            { img: 'disney8.jpeg', title: 'SMKN 1 GIANYAR', desc: '🙏😍😘', likes: '19K', comments: '158' },
+            { img: 'disney9.jpeg', title: 'SMKN 1 GIANYAR', desc: '😍🎓🏅😘', likes: '13K', comments: '191' },
+            { img: 'disney10.jpeg', title: 'SMKN 1 GIANYAR', desc: '😍🎓🏅', likes: '16K', comments: '111' }
+        ];
+        
+        let currentIndex = 0;
 
-            gallery.addEventListener("click", function() {
-                if (music.paused) {
-                    music.play();
-                }
-            });
-        });
-
-        // Fungsi untuk zoom gambar
-        function zoomImage(img) {
-            const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("zoomedImage");
+        // Floating Stars Animation
+        function createStars() {
+            const container = document.getElementById('stars-container');
+            const starSymbols = ['★', '☆', '✧', '✦', '✯', '✩'];
             
-            modal.style.display = "block";
-            modalImg.src = img.src;
+            for (let i = 0; i < 15; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.innerHTML = starSymbols[Math.floor(Math.random() * starSymbols.length)];
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                star.style.animationDuration = (Math.random() * 8 + 4) + 's';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.color = ['#f85eba', '#00a1f1', '#ffbb00', '#ffffff'][Math.floor(Math.random() * 4)];
+                container.appendChild(star);
+            }
         }
 
-        // Fungsi untuk menutup modal
+        // Music Player
+        const music = document.getElementById('music');
+        const musicPlayer = document.getElementById('musicPlayer');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            } else {
+                music.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Show music player after delay
+        setTimeout(() => {
+            musicPlayer.classList.add('show');
+        }, 1500);
+
+        // Lightbox Modal
+        function openModal(imgElement, title, desc) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("expandedImg");
+            const modalTitle = document.getElementById("modalTitle");
+            const modalDesc = document.getElementById("modalDesc");
+            
+            // Find the index of the clicked image
+            const imgSrc = imgElement.src.split('/').pop();
+            currentIndex = galleryItems.findIndex(item => item.img === imgSrc);
+            
+            // Update modal content
+            modalImg.src = imgElement.src;
+            modalTitle.textContent = title;
+            modalDesc.textContent = desc;
+            
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            
+            // Start music when first image is opened if not playing
+            if (!isPlaying) {
+                toggleMusic();
+            }
+        }
+
         function closeModal() {
-            document.getElementById("imageModal").style.display = "none";
+            document.getElementById("imageModal").classList.remove('show');
+            document.body.style.overflow = 'auto';
         }
 
-        // Tutup modal ketika mengklik di luar gambar
+        function navigate(direction) {
+            currentIndex += direction;
+            
+            // Wrap around if at beginning or end
+            if (currentIndex < 0) {
+                currentIndex = galleryItems.length - 1;
+            } else if (currentIndex >= galleryItems.length) {
+                currentIndex = 0;
+            }
+            
+            const item = galleryItems[currentIndex];
+            const modalImg = document.getElementById("expandedImg");
+            const modalTitle = document.getElementById("modalTitle");
+            const modalDesc = document.getElementById("modalDesc");
+            
+            modalImg.src = item.img;
+            modalTitle.textContent = item.title;
+            modalDesc.textContent = item.desc;
+            
+            // Add slight animation
+            modalImg.style.opacity = '0';
+            setTimeout(() => {
+                modalImg.style.opacity = '1';
+            }, 100);
+        }
+
+        // Close modal when clicking outside image
         window.onclick = function(event) {
             const modal = document.getElementById("imageModal");
             if (event.target == modal) {
-                modal.style.display = "none";
+                closeModal();
             }
         }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById("imageModal");
+            if (modal.classList.contains('show')) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                } else if (e.key === 'ArrowLeft') {
+                    navigate(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigate(1);
+                }
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+        });
     </script>
-
-    <!-- Tombol Kembali ke Album -->
-    <div class="menu">
-        <a href="halaman_special.html">🔙 Kembali</a>
-    </div>
-
 </body>
-</html>s
+</html>
