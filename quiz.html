@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ Love Quiz Spesial ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --primary-dark: #c9184a;
+            --secondary: #ff8fa3;
+            --light: #fff0f3;
+            --dark: #2b2d42;
+            --success: #4cc9f0;
+            --error: #ef233c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--light), var(--secondary));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--dark);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse 6s infinite linear;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.3; }
+            100% { transform: scale(0.8); opacity: 0; }
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        .start-screen, .quiz-screen, .result-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .start-screen img {
+            width: 120px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn:hover::after {
+            transform: translateX(100%);
+        }
+
+        .quiz-screen, .result-screen {
+            display: none;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .options {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.3s ease;
+        }
+
+        .option-btn:hover::before {
+            transform: scaleY(1);
+        }
+
+        .option-btn.correct {
+            background: rgba(76, 201, 240, 0.1);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: rgba(239, 35, 60, 0.1);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            font-size: 1rem;
+            margin: 15px 0;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: rgba(76, 201, 240, 0.1);
+            color: var(--success);
+            display: block;
+        }
+
+        .feedback.wrong {
+            background: rgba(239, 35, 60, 0.1);
+            color: var(--error);
+            display: block;
+        }
+
+        .progress {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .result-screen h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .score span {
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary);
+            opacity: 0;
+            z-index: 999;
+            animation: confettiFall 3s linear forwards;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .heart-float {
+            position: fixed;
+            font-size: 24px;
+            animation: floatUp 4s linear forwards;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .question {
+                font-size: 1.1rem;
+            }
+            .option-btn {
+                font-size: 0.9rem;
+                padding: 10px 12px;
+            }
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>❤️ Love Quiz Spesial ❤️</h1>
+            <p>Jawab pertanyaan ini</p>
+        </div>
+
+        <div class="content">
+            <!-- Start Screen -->
+            <div class="start-screen" id="startScreen">
+                <img src="https://i.ibb.co/fY0G0Jk/heart.gif" alt="Heart">
+                <h2>Kamu Masuk Perangkap😈</h2>
+                <p>Jawab pertanyaan dengan jujur ya sayaaangku!</p>
+                <button class="btn" id="startBtn">Mulai Quiz</button>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div class="quiz-screen" id="quizScreen">
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <div class="question" id="question"></div>
+                <div class="options" id="options"></div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+
+            <!-- Result Screen -->
+            <div class="result-screen" id="resultScreen">
+                <h2>Hasil Quiz Kamu</h2>
+                <div class="score" id="score"></div>
+                <p id="resultMessage"></p>
+                <button class="btn" id="restartBtn">Main Lagi</button>
+                <button class="btn" id="homeBtn" style="background: #6c757d; margin-top: 10px;">Kembali</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Apa makanan yang aku gk suka?,hayolo",
+                options: ["Ban motor", "Gedang", "Mie Ayam", "Mangga"],
+                answer: "Gedang",
+                explanation: "Betul! Aku gk suka gedang karena mantan mu gedang, muu ke alih"
+            },
+            {
+                question: "Aku ganteng gak sayaang? ",
+                options: ["Ganteng", "Ganteng Banget Sumpah", "Gantengan Mantan Aku", "Gak"],
+                answer: "Ganteng Banget Sumpah",
+                explanation: "Benar cantikk kuu kamu memang jujur😘"
+            },
+            {
+                question: "Siapa nama lengkap aku sayaang?",
+                options: ["Muhamad Arta Rosianto", "I Komang Arta Wijaya", "I Putu Arta Wijaya Putra", "Putu Arta Wijaya Putra"],
+                answer: "I Putu Arta Wijaya Putra",
+                explanation: "bener sayaang❤️"
+            },
+            {
+                question: "Lahir tanggal berapa aku sayaang?",
+                options: ["12 Januari", "15 Februari", "24 April", "25 April"],
+                answer: "24 April",
+                explanation: "Pinter!"
+            },
+            {
+                question: "Apa hobi aku?",
+                options: ["Main game", "olga", "Main bola", "mencintai imeel"],
+                answer: "mencintai imeel",
+                explanation: "Beneh sayaang hobi aku emang mencintai kamuu😍"
+            },
+            {
+                question: "Pacarmu desa apa sayaang?",
+                options: ["Abianbase", "Bitera", "Medahan", "Sg nawang"],
+                answer: "Medahan",
+                explanation: "Beneh beneh sayaang"
+            },
+            {
+                question: "sayaang mau jadi istri akuu?",
+                options: ["Amit Amit", "Aku udah punya yg lain", "Mau banget sumpah", "Sg lahhh mu jelek"],
+                answer: "Mau banget sumpah",
+                explanation: "Ahh seken?"
+            },
+            {
+                question: "Siapa nama aku selain artaa sayaang?",
+                options: ["Dediy muliyadi", "Dedik", "Sugar dedik", "noval ganteng (tapi boong)"],
+                answer: "Dedik",
+                explanation: "Pinter"
+            },
+            {
+                question: "Kamu masih cinta mantan muu?",
+                options: ["Masih lah gk akan pernah lupa", "amit amit", "masih dikit", "Aku selamanya cinta sama artaa"],
+                answer: "Aku selamanya cinta sama artaa",
+                explanation: "Ahhh seken sayaang?"
+            },
+            {
+                question: "Selain gedang apa yg aku gk suka lagi?",
+                options: ["Mie", "Durian", "Makanan manis", "bakso"],
+                answer: "Durian",
+                explanation: "Yaaa bener sayaang"
+            },
+            {
+                question: "Dimana tanah kelahiran kita sayaang?",
+                options: ["Alun alun", "Gor", "stadion", "Semua salah"],
+                answer: "Gor",
+                explanation: "Nah Jani be megusur"
+            },
+            {
+                question: "aku pakek motor apa sayaang?",
+                options: ["Jupiter", "Jupiter", "Nmax", "Vario"],
+                answer: "Vario",
+                explanation: "Bener tapi kamu suka jupiter"
+            },
+            {
+                question: "Pertanyaan terakhir, kamu cinta sama aku sayaang?, sayang sama aku?",
+                options: ["Iyaa cinta", "Aku cinta banget dan sayang banget sama kamu sayaang sumpah", "aku gk cinta dan sayang kamu", "Aku cinta m"],
+                answer: "Aku cinta banget dan sayang banget sama kamu sayaang sumpah",
+                explanation: "Yaa aku percaya"
+            }
+        ];
+
+        // DOM Elements
+        const startScreen = document.getElementById('startScreen');
+        const quizScreen = document.getElementById('quizScreen');
+        const resultScreen = document.getElementById('resultScreen');
+        const questionEl = document.getElementById('question');
+        const optionsEl = document.getElementById('options');
+        const feedbackEl = document.getElementById('feedback');
+        const progressBar = document.getElementById('progressBar');
+        const scoreEl = document.getElementById('score');
+        const resultMessage = document.getElementById('resultMessage');
+        const startBtn = document.getElementById('startBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const homeBtn = document.getElementById('homeBtn');
+
+        // Quiz Variables
+        let currentQuestion = 0;
+        let score = 0;
+        let quizCompleted = false;
+
+        // Initialize Quiz
+        function initQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            quizCompleted = false;
+            startScreen.style.display = 'none';
+            quizScreen.style.display = 'block';
+            resultScreen.style.display = 'none';
+            loadQuestion();
+        }
+
+        // Load Question
+        function loadQuestion() {
+            if (currentQuestion >= quizData.length) {
+                showResult();
+                return;
+            }
+
+            const question = quizData[currentQuestion];
+            questionEl.textContent = question.question;
+            optionsEl.innerHTML = '';
+            feedbackEl.style.display = 'none';
+            feedbackEl.className = 'feedback';
+
+            // Update progress
+            progressBar.style.width = `${(currentQuestion / quizData.length) * 100}%`;
+
+            // Create options
+            question.options.forEach(option => {
+                const optionBtn = document.createElement('button');
+                optionBtn.className = 'option-btn';
+                optionBtn.textContent = option;
+                optionBtn.addEventListener('click', () => selectAnswer(option));
+                optionsEl.appendChild(optionBtn);
+            });
+        }
+
+        // Select Answer
+        function selectAnswer(selected) {
+            const question = quizData[currentQuestion];
+            const options = document.querySelectorAll('.option-btn');
+            
+            // Disable all options
+            options.forEach(option => {
+                option.disabled = true;
+            });
+
+            // Check answer
+            if (selected === question.answer) {
+                score++;
+                feedbackEl.textContent = question.explanation;
+                feedbackEl.classList.add('correct');
+                
+                // Highlight correct answer
+                options.forEach(option => {
+                    if (option.textContent === question.answer) {
+                        option.classList.add('correct');
+                    }
+                });
+            } else {
+                feedbackEl.textContent = `Jawaban salah! Yang benar: ${question.answer}`;
+                feedbackEl.classList.add('wrong');
+                
+                // Highlight correct and wrong answers
+                options.forEach(option => {
+                    if (option.textContent === question.answer) {
+                        option.classList.add('correct');
+                    } else if (option.textContent === selected) {
+                        option.classList.add('wrong');
+                    }
+                });
+            }
+
+            feedbackEl.style.display = 'block';
+            
+            // Move to next question after delay
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < quizData.length) {
+                    loadQuestion();
+                } else {
+                    showResult();
+                }
+            }, 1500);
+        }
+
+        // Show Result
+        function showResult() {
+            quizScreen.style.display = 'none';
+            resultScreen.style.display = 'block';
+            
+            // Update score
+            scoreEl.innerHTML = `Kamu benar <span>${score}</span> dari ${quizData.length} pertanyaan`;
+            
+            // Custom message based on score
+            if (score === quizData.length) {
+                resultMessage.textContent = "Bagus banget sayaaangkuu cintaakuu calon istrikuu🥰😍❤️";
+                createConfetti(100);
+            } else if (score >= quizData.length * 0.7) {
+                resultMessage.textContent = "Lumayan! 😘";
+                createConfetti(50);
+            } else if (score >= quizData.length / 2) {
+                resultMessage.textContent = "Bagus! Tapi kamu suka mantanmu! 😏";
+                createConfetti(30);
+            } else {
+                resultMessage.textContent = "Waduh kamu gk cinta aku 😢";
+                createConfetti(15);
+            }
+            
+            quizCompleted = true;
+        }
+
+        // Create Confetti
+        function createConfetti(count) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = getRandomColor();
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(confetti);
+                    
+                    // Remove after animation
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
+            
+            // Create floating hearts
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-float';
+                    heart.textContent = ['❤️', '💖', '💕', '💗', '💓'][Math.floor(Math.random() * 5)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    document.body.appendChild(heart);
+                    
+                    // Remove after animation
+                    setTimeout(() => heart.remove(), 4000);
+                }, i * 100);
+            }
+        }
+
+        // Get random color
+        function getRandomColor() {
+            const colors = ['#ff4d6d', '#ff8fa3', '#ffb3c1', '#ff758f', '#ff0a54'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // Event Listeners
+        startBtn.addEventListener('click', initQuiz);
+        restartBtn.addEventListener('click', initQuiz);
+        homeBtn.addEventListener('click', () => {
+            window.location.href = "ikon.html"; // Ganti dengan halaman tujuan
+        });
+
+        // Initial floating hearts
+        setInterval(() => {
+            if (!quizCompleted) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-float';
+                heart.textContent = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                document.body.appendChild(heart);
+                
+                // Remove after animation
+                setTimeout(() => heart.remove(), 4000);
+            }
+        }, 800);
+    </script>
+</body>
+</html>
